@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="MinusButton">
+        <item name="android:background">@drawable/btn_circle</item>
+    <item name="android:src">@drawable/ic_btn_round_minus</item>
+    <item name="android:contentDescription">@string/description_minus_button</item>
+    </style>
+</resources>

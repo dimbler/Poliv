@@ -1,0 +1,180 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dddddd"
+    android:padding="6dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Управление насом"
+        android:id="@+id/textView"
+        android:gravity="top"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="24dp" />
+
+    <TableLayout
+        android:layout_below="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tableLayout">
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_background"
+                android:checked="false"
+                android:textOff="Насос выкл"
+                android:textOn="Насос вкл"
+                android:textSize="24sp"
+                android:layout_weight="0"
+                android:gravity="left|center_vertical"
+                android:drawableLeft="@drawable/nasos" />
+
+            <NumberPicker
+                android:id="@+id/numberPicker1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="3"
+                android:theme="@android:style/Theme.Black.NoTitleBar"
+                android:orientation="vertical" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Датчики"
+                android:id="@+id/textView2"
+                android:textSize="24dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ToggleButton
+                android:id="@+id/act_main_tb_rain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/toggleButton"
+                android:layout_weight="1"
+                android:background="@drawable/button_normal"
+                android:checked="false"
+                android:drawableLeft="@drawable/rain"
+                android:gravity="left|center_vertical"
+                android:text="Дождь"
+                android:textOff=" Дождя нет"
+                android:textOn=" Идет дождь"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ToggleButton
+                android:id="@+id/act_main_tb_pochva"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@+id/act_main_tb_rain"
+                android:layout_alignStart="@+id/act_main_tb_rain"
+                android:layout_below="@+id/act_main_tb_rain"
+                android:layout_weight="1"
+                android:background="@drawable/button_normal"
+                android:checked="false"
+                android:drawableLeft="@drawable/pochva"
+                android:gravity="left|center_vertical"
+                android:text="Почва"
+                android:textOff=" Почва сухая"
+                android:textOn=" Почва влажная"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <Button
+                android:id="@+id/act_main_btn_temp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_weight="10"
+                android:background="@drawable/button_normal"
+                android:drawableLeft="@drawable/temp"
+                android:gravity="left|center_vertical"
+                android:text="Температура"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/act_main_btn_hum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/act_main_btn_temp"
+                android:layout_weight="10"
+                android:background="@drawable/button_normal"
+                android:drawableLeft="@drawable/humidity"
+                android:gravity="left|center_vertical"
+                android:text="Влажность"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                android:layout_column="0" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/errorText"
+                android:layout_column="0"
+                android:textColor="#ffff000c" />
+        </TableRow>
+
+    </TableLayout>
+
+
+
+
+</RelativeLayout>
