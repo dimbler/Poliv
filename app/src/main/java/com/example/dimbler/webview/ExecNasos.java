@@ -37,6 +37,7 @@ public class ExecNasos extends AsyncTask<String, Boolean, String> {
 
     @Override
     protected String doInBackground(String... paramms) {
+
         try {
             String url = new String("https://api.smartliving.io/asset/c8TSQK105hWL7vPnbpJ8ol722/command");
             HttpParams params = new BasicHttpParams();
@@ -66,6 +67,7 @@ public class ExecNasos extends AsyncTask<String, Boolean, String> {
             while ((s = buffer.readLine()) != null) {
                 result += s;
             }
+            Log.d("JSON", result);
             return result;
 
         }

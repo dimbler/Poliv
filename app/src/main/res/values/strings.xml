@@ -11,4 +11,8 @@
     <string name="error_not_connected">Вы не подключены к сети</string>
     <string name="title_activity_two">Управление поливом</string>
     <string name="exit">Выход</string>
+    <string name="nasos_stopped">Остановка насоса</string>
+    <string name="nasos_not_stopped">Не удалось остановить насос</string>
+    <string name="nasos_on">Насос включен</string>
+    <string name="nasos_off">Насос выключен</string>
 </resources>

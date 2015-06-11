@@ -30,10 +30,17 @@ public class MainActivity extends ActionBarActivity implements OnClickListener  
     public TextView errorText;
     private Timer myTimer;
     public static String access_token = null;
-    public static int work_time = 0;
-    public NumberPicker np;
 
-    ToggleButton nasos_Button;
+    public static int work_time = 0;
+    public static boolean work_status = false;
+    public static NumberPicker np;
+
+    Alarm alarm = new Alarm();
+
+    Button nasos_Button;
+    ToggleButton rainButton;
+    ToggleButton pochvaButton;
+
     /*
     //Получает токен авторизации с сервера
     public void GetAccessToken(){
@@ -92,8 +99,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener  
                             ((ToggleButton) pochvaButton).setChecked(Boolean.valueOf(value));
                         }
                         if ("Полив".equals(id)) {
-
-                            ((ToggleButton) nasos_Button).setChecked(Boolean.valueOf(value));
+                            work_status = Boolean.valueOf(value);
+                            if (Boolean.valueOf(value) == true){
+                                nasos_Button.setText(R.string.nasos_on);
+                            }else{
+                                nasos_Button.setText(R.string.nasos_off);
+                            }
                         }
                         if ("Идет дождь".equals(id)) {
                             Button rainButton = (Button) findViewById(R.id.act_main_tb_rain);
@@ -150,7 +161,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener  
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        nasos_Button = (ToggleButton) findViewById(R.id.toggleButton);
+        nasos_Button = (Button) findViewById(R.id.toggleButton);
 
         if (getIntent().getBooleanExtra("EXIT", false)) {
             finish();
@@ -165,7 +176,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener  
 
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-
                 work_time = newVal;
             }
         });
@@ -204,8 +214,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener  
             errorText.setText("Отсутвует соединение с сервером");
         }
         */
-        Button button = (Button)findViewById(R.id.toggleButton);
 
+
+        //Button button = (Button)findViewById(R.id.toggleButton);
+
+        /*
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 boolean on = ((ToggleButton) v).isChecked();
@@ -234,6 +247,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener  
                 }
             }
         });
+        */
 
         Button tempButton = (Button)findViewById(R.id.act_main_btn_temp);
         tempButton.setOnClickListener(this);
@@ -241,8 +255,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener  
         Button humButton = (Button)findViewById(R.id.act_main_btn_hum);
         humButton.setOnClickListener(this);
 
-
-
+        nasos_Button = (Button) findViewById(R.id.toggleButton);
+        nasos_Button.setOnClickListener(this);
     }
 
     @Override
@@ -255,7 +269,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener  
                 TimerMethod();
             }
 
-        }, 0, 30000);
+        }, 0, 60000);
         Log.d("Timer", "Create timer");
     }
 
@@ -304,6 +318,24 @@ public class MainActivity extends ActionBarActivity implements OnClickListener  
             case R.id.act_main_btn_hum:
                 intent.putExtra("urlname", "http://api.thingspeak.com/channels/38705/charts/2?width=350&height=460&results=30&dynamic=true&type=spline");
                 startActivity(intent);
+                break;
+            case R.id.toggleButton:
+                if (!work_status) {
+                    nasos_Button.setText(R.string.nasos_on);
+                    if (work_time == 0) {
+                        new ExecNasos().execute(access_token, "true");
+                    } else {
+                        new ExecNasos().execute(access_token, "true");
+                        alarm.SetAlarm(this, work_time, access_token);
+                        np.setValue(0);
+                        work_time = 0;
+
+                    }
+                } else {
+                    nasos_Button.setText(R.string.nasos_off);
+                    new ExecNasos().execute(access_token, "false");
+                }
+
                 break;
             default:
                 break;
